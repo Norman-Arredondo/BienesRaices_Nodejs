@@ -8,6 +8,9 @@ const app = express();
 app.set('view engine', 'pug'); //Establecemos que vamos a usar Pug
 app.set('views', './views'); //Directorio donde se encuentra
 
+//Carpeta Pública
+app.use(express.static('public'));
+
 //Routing
 app.use('/auth', usuarioRoutes); //Todas las rutas con /auth
 
