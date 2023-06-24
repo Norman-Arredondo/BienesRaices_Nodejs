@@ -1,4 +1,5 @@
 import express from 'express';
+import { formularioLogin } from '../controllers/usuarioController.js';
 
 const router = express.Router();
 
@@ -9,12 +10,7 @@ router.get('/', function(req, res){
 });
 */
 
-router.get('/login', (req, res ) => {
-    res.render('auth/login' , {
-        autenticado: true,
-        
-    });
-});
+router.get('/login', formularioLogin);
 
 
  
