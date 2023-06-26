@@ -5,7 +5,7 @@ import usuarioRoutes from './routes/usuarioRoutes.js'
 const app = express(); 
 
 //Habilitar Pug
-app.set('view engine', 'pug'); //Establecemos que vamos a usar Pug
+app.set('views engine', 'pug'); //Establecemos que vamos a usar Pug
 app.set('views', './views'); //Directorio donde se encuentra
 
 //Carpeta Pública
