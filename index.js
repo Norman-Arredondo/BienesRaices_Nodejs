@@ -1,8 +1,17 @@
 import express from 'express' //ES modules 
 import usuarioRoutes from './routes/usuarioRoutes.js'
+import db from './config/db.js';
 
 //Crear la app. Mandamos a llamar
 const app = express(); 
+
+//Conexión a la Base de Datos
+try{
+    await db.authenticate();
+    console.log('Conexión correcta a la BD')
+} catch(error) {
+    console.log(error)
+}
 
 //Habilitar Pug
 app.set('view engine', 'pug'); //Establecemos que vamos a usar Pug
