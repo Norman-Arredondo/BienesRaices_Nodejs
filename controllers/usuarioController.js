@@ -1,4 +1,5 @@
-
+import { json } from 'sequelize';
+import Usuario from '../models/Usuario.js'
 
 const formularioLogin =  (req, res ) => {
     res.render('auth/login' , {
@@ -14,6 +15,12 @@ const formularioRegistro =  (req, res ) => {
     });
 }
 
+//Como vamos a interactuar con la BD vamos a hacer la función asyncrona
+const registrar = async (req, res) =>{
+    const usuario = await Usuario.create(req.body)
+    res.json(usuario)
+}
+
 const formularioOlvidePassword =  (req, res ) => {
     res.render('auth/olvide-password' , {
         pagina: 'Recupera tu acceso a Bienes Raices'
@@ -24,5 +31,6 @@ const formularioOlvidePassword =  (req, res ) => {
 export {
     formularioLogin,
     formularioRegistro,
-    formularioOlvidePassword
+    formularioOlvidePassword,
+    registrar
 }
