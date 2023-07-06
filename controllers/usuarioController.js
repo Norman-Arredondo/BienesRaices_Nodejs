@@ -23,10 +23,18 @@ const registrar = async (req, res) =>{
     await check('password').isLength({min: 6, max: 6}).withMessage('La contraseña debe de ser de exactamente 6 caracteres').run(req);
     await check('repetir_password').equals('password').withMessage('La contraseña no es la misma').run(req);
 
-    let resultado = validationResult(req);
+    let resultado = validationResult(req); //Guarda el resultado de la validación
 
     //Verificar que el resultado este vacío
-    res.json(resultado.array());
+    if(!resultado.isEmpty()) {
+        //Hay errores
+        return res.render('auth/registro' , {
+            pagina: 'Crear cuenta',
+            errores: resultado.array()
+        });
+    }
+
+    
     const usuario = await Usuario.create(req.body)
     res.json(usuario)
 }
