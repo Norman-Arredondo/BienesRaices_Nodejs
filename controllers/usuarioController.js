@@ -81,6 +81,18 @@ const registrar = async (req, res) =>{
     
 }
 
+//Función que comprueba una cuenta
+const confirmar = (req, res) => {
+    const {token} = req.params;
+    //console.log(req.params.token);
+    console.log(token);
+
+    // Verificar si el token es válido
+
+    //Confirmar la cuenta
+    
+}
+
 const formularioOlvidePassword =  (req, res ) => {
     res.render('auth/olvide-password' , {
         pagina: 'Recupera tu acceso a Bienes Raices'
@@ -91,6 +103,7 @@ const formularioOlvidePassword =  (req, res ) => {
 export {
     formularioLogin,
     formularioRegistro,
+    confirmar,
     formularioOlvidePassword,
     registrar
 }
