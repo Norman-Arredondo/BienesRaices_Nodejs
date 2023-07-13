@@ -13,7 +13,7 @@ const formularioLogin = (req, res) => {
 const formularioRegistro = (req, res) => {
     res.render('auth/registro', {
         pagina: 'Crear cuenta',
-        csrfToken : req.csrfToken()
+        csrfToken: req.csrfToken()
 
     });
 }
@@ -33,7 +33,7 @@ const registrar = async (req, res) => {
         //Hay errores
         return res.render('auth/registro', {
             pagina: 'Crear cuenta',
-            csrfToken : req.csrfToken(),
+            csrfToken: req.csrfToken(),
             errores: resultado.array(),
             usuario: {
                 nombre: req.body.nombre,
@@ -50,7 +50,7 @@ const registrar = async (req, res) => {
     if (existeUsuario) {
         return res.render('auth/registro', {
             pagina: 'Crear cuenta',
-            csrfToken : req.csrfToken(),
+            csrfToken: req.csrfToken(),
             errores: [{ msg: 'El usuario ya está registrado' }],
             usuario: {
                 nombre: req.body.nombre,
@@ -117,9 +117,29 @@ const confirmar = async (req, res) => {
 
 const formularioOlvidePassword = (req, res) => {
     res.render('auth/olvide-password', {
-        pagina: 'Recupera tu acceso a Bienes Raices'
+        pagina: 'Recupera tu acceso a Bienes Raices',
+        csrfToken: req.csrfToken(),
 
     });
+}
+
+const resetPassword = async (req, res) => {
+    //Validación
+    await check('email').isEmail().withMessage('Ingresa un Email válido').run(req);
+
+    let resultado = validationResult(req); //Guarda el resultado de la validación
+
+    //Verificar que el resultado este vacío
+    if (!resultado.isEmpty()) {
+        //Hay errores
+        return res.render('auth/olvide-password', {
+            pagina: 'Recupera tu acceso a Bienes Raices',
+            csrfToken: req.csrfToken(),
+            errores: resultado.array()
+        });
+    }
+
+    //Buscar el usuario
 }
 
 export {
@@ -127,5 +147,6 @@ export {
     formularioRegistro,
     confirmar,
     formularioOlvidePassword,
-    registrar
+    registrar,
+    resetPassword
 }
